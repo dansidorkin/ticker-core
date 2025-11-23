@@ -3,9 +3,8 @@ Created by Daniel Mishan Sat Nov 22 in Oakhurst, CA
 Project Name: Ticker-Core
 
 This project uses yfinance and visualizes correlations by price movements in market. For example,
-suppose that $NVDA and $MSFT both move downwards during a specific period (1d, 1wk, 1mo, 1yr, ytd).
-Then, they are both correlated. We use the Pearson Correlation to determine correlation trends.
-We plot X-axis as the date, and plot Y-axis as the
+suppose that $NVDA and $MSFT both move downwards during a specific period. We check correlation.
+We plot $MSFT and $NVDA as nodes and their correlations as edges.
 """
 import pandas as pd #For Data
 import yfinance as yf
@@ -16,12 +15,8 @@ import networkx as nx
 
 def main():
     print("This program visualizes market movements.")
-    df = yf.download(["MU", "AAPL", "AMZN",
-                      "EQT","BTC-USD",
-                      "TSM", "NVDA", "AMD", "MSFT",
-                      "ASML", "MP"], period="1mo", interval="1d")["Close"].dropna() # drop NaN values
-    df = df.rename(columns={"GC=F": "GOLD"})
-    # sns.regplot(x="GOLD", y="NVDA", data=df)
+    df = yf.download(["NVDA", "GC=F","MSFT", "AMD", "BTC-USD"],
+                     period="6mo", interval="1d")["Close"].dropna() # drop NaN values
 
     # 1. Correlation matrix
     corr = df.corr()
