@@ -8,6 +8,6 @@ def run(args):
     df = yf.download(tickers, period="1mo", interval="1d", auto_adjust=True)["Close"]
 
     Path("data").mkdir(exist_ok=True)
-    df.to_csv("data/raw.csv")
+    df.to_csv("data/raw_prices.csv")
 
     print("[fetch] Saved to data/raw.csv")
