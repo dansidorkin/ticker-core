@@ -16,7 +16,9 @@ def run(args):
     # Try-Catch Error catch here, raises  YFPricesMissingError
     print(f"[correlate] Downloaded successfully.")
     print(f"[correlate] Calculating correlation...")
-    print(df.corr()) #
+    print(df.corr())
+
+    # Do we want to save the data listed in the command-line?
     save = input("[correlate] Save correlation data? [y/n]\n")
     if save.lower() == "y":
         print(f"[correlate] Saving to data/corr.csv...")
@@ -27,6 +29,8 @@ def run(args):
         if openFile.lower() == "y":
             print(f"[correlate] Opening correlation file...")
             subprocess.run(["open", f"data/correlation.csv"], check=True)
+
+    # Do we want a heat-map of the correlation data?
     visualization = input("[correlate] Visualize correlation data? [y/n]\n")
     if visualization.lower() == "y":
         print(f"[correlate] Visualizing correlation data...")
@@ -36,7 +40,6 @@ def run(args):
         plt.yticks(range(len(tickers)), tickers)
 
         plt.colorbar()
-        plt.tight_layout()
         plt.show()
     print("[correlate] Task completed.")
 
